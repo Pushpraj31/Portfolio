@@ -117,7 +117,7 @@ export default function Navbar({ dark, onToggle }) {
           PR<span className="text-accent">.</span>
         </a>
 
-        <nav className="nav-pill hidden lg:flex" ref={navRef} aria-label="Primary">
+        <nav className="nav-pill" ref={navRef} aria-label="Primary">
           <span className="nav-indicator" aria-hidden="true" />
           {links.map(([label, href], index) => (
             <a
@@ -149,7 +149,7 @@ export default function Navbar({ dark, onToggle }) {
           </a>
           <button
             type="button"
-            className="header-menu-btn lg:hidden"
+            className="header-menu-btn"
             onClick={() => setOpen((v) => !v)}
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
