@@ -94,14 +94,19 @@ export default function Navbar({ dark, onToggle }) {
     lockTimer.current = window.setTimeout(unlock, 1000);
   };
 
+  useEffect(() => {
+    document.body.classList.toggle("menu-open", open);
+    return () => document.body.classList.remove("menu-open");
+  }, [open]);
+
   return (
     <header className="site-header">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-3">
-        <a href="#top" className="logo-mark" onClick={() => goTo("")}>
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 sm:px-5">
+        <a href="#top" className="logo-mark shrink-0" onClick={() => goTo("")}>
           PR<span className="text-accent">.</span>
         </a>
 
-        <nav className="nav-pill hidden md:flex" ref={navRef} aria-label="Primary">
+        <nav className="nav-pill hidden lg:flex" ref={navRef} aria-label="Primary">
           <span className="nav-indicator" aria-hidden="true" />
           {links.map(([label, href], index) => (
             <a
@@ -113,13 +118,13 @@ export default function Navbar({ dark, onToggle }) {
               onClick={() => goTo(href)}
               className={`nav-link ${active === href ? "is-active" : ""}`}
             >
-              <span className="nav-index">{String(index + 1).padStart(2, "0")}</span>
+              <span className="nav-index hidden xl:inline">{String(index + 1).padStart(2, "0")}</span>
               {label}
             </a>
           ))}
         </nav>
 
-        <div className="flex items-center gap-2">
+        <div className="flex shrink-0 items-center gap-2">
           <button
             type="button"
             onClick={onToggle}
@@ -133,7 +138,7 @@ export default function Navbar({ dark, onToggle }) {
           </a>
           <button
             type="button"
-            className="header-icon-btn md:hidden"
+            className="header-icon-btn lg:hidden"
             onClick={() => setOpen((v) => !v)}
             aria-label="Toggle menu"
             aria-expanded={open}
@@ -144,18 +149,23 @@ export default function Navbar({ dark, onToggle }) {
       </div>
 
       {open && (
-        <nav className="flex flex-col gap-1.5 border-t border-ink-800/10 px-4 py-3 md:hidden dark:border-white/10" aria-label="Mobile">
-          {links.map(([label, href], index) => (
-            <a
-              key={href}
-              href={href}
-              onClick={() => goTo(href)}
-              className={`mobile-nav-link ${active === href ? "is-active" : ""}`}
-            >
-              {label}
-              <span className="nav-index">{String(index + 1).padStart(2, "0")}</span>
+        <nav className="max-h-[calc(100dvh-4.5rem)] overflow-y-auto border-t border-ink-800/10 px-4 py-3 lg:hidden dark:border-white/10" aria-label="Mobile">
+          <div className="flex flex-col gap-1.5">
+            {links.map(([label, href], index) => (
+              <a
+                key={href}
+                href={href}
+                onClick={() => goTo(href)}
+                className={`mobile-nav-link ${active === href ? "is-active" : ""}`}
+              >
+                {label}
+                <span className="nav-index">{String(index + 1).padStart(2, "0")}</span>
+              </a>
+            ))}
+            <a href={profile.resume} className="btn btn-primary mt-2 sm:hidden" download>
+              Download resume
             </a>
-          ))}
+          </div>
         </nav>
       )}
     </header>

@@ -9,11 +9,18 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 5.5rem;
+  overflow-x: hidden;
 }
 
 body {
   @apply bg-ink-50 text-ink-800 antialiased dark:bg-ink-950 dark:text-ink-50;
   font-feature-settings: "ss01" on, "cv11" on;
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+body.menu-open {
+  overflow: hidden;
 }
 
 ::selection {
@@ -46,7 +53,7 @@ body {
 }
 
 .btn {
-  @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition;
+  @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition;
 }
 
 .btn-primary {
@@ -64,6 +71,7 @@ button:focus-visible {
 
 .site-header {
   @apply sticky top-0 z-40 border-b border-ink-800/10 bg-ink-50/80 backdrop-blur-xl dark:border-white/10 dark:bg-ink-950/75;
+  padding-top: env(safe-area-inset-top);
 }
 
 .logo-mark {
@@ -159,7 +167,7 @@ button:focus-visible {
 }
 
 .header-icon-btn {
-  @apply rounded-full border border-ink-800/10 p-2 text-ink-700 transition dark:border-white/10 dark:text-ink-100;
+  @apply inline-flex h-11 w-11 items-center justify-center rounded-full border border-ink-800/10 text-ink-700 transition dark:border-white/10 dark:text-ink-100;
 }
 
 .header-icon-btn:hover {
@@ -182,9 +190,10 @@ button:focus-visible {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.75rem 0.9rem;
+  min-height: 48px;
+  padding: 0.85rem 1rem;
   border-radius: 0.9rem;
-  font-size: 0.92rem;
+  font-size: 1rem;
   font-weight: 600;
   transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
@@ -200,4 +209,16 @@ button:focus-visible {
   font-size: 0.68rem;
   letter-spacing: 0.12em;
   opacity: 0.5;
+}
+
+.contact-value {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+@media (max-width: 639px) {
+  .hero-actions .btn,
+  .project-actions .btn {
+    width: 100%;
+  }
 }
