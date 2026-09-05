@@ -149,13 +149,14 @@ export default function Navbar({ dark, onToggle }) {
           </a>
           <button
             type="button"
-            className="header-icon-btn lg:hidden"
+            className="header-menu-btn lg:hidden"
             onClick={() => setOpen((v) => !v)}
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
             aria-controls="mobile-menu"
           >
             {open ? <IconClose /> : <IconMenu />}
+            <span>{open ? "Close" : "Menu"}</span>
           </button>
         </div>
       </div>
